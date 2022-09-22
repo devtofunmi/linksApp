@@ -64,7 +64,7 @@ const SignUp = () => {
           userName,
           confirmPassword,
           OTP: generateOtp(),
-          isVerrified: false,
+          isVerified: false,
         };
         localStorage.setItem("userInfo", JSON.stringify(userInfo));
         console.log(userInfo);
