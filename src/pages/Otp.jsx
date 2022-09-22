@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -20,6 +20,51 @@ const Otp = () => {
 
   const toast = useToast();
   const navigate = useNavigate();
+  const showError = (m) => {
+    toast({
+      description: m,
+      status: "error",
+      duration: 2000,
+      isClosable: true,
+    });
+  };
+
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    setUserInfo(userInfo);
+    setCorrectOtp(userInfo.OTP);
+    console.log(userInfo);
+  }, []);
+
+  function handleSubmit() {
+    console.log(pin, correctOtp);
+    setLoading(true);
+    setTimeout(() => {
+      if (!pin) {
+        showError("enter your pin");
+      } else if (pin != correctOtp) {
+        showError("invalid otp");
+      } else {
+        toast({
+          description: "your otp pin is correct",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
+        // navigate('/login')
+
+        localStorage.setItem(
+          "userInfo",
+          JSON.stringify({
+            ...userInfo,
+            isVerified: true,
+            OTP: "",
+          })
+        );
+      }
+      setLoading(false);
+    }, 1500);
+  }
   return (
     <>
       <Flex
@@ -52,7 +97,7 @@ const Otp = () => {
             marginTop={30}
             backgroundColor="blue.500"
             color="white"
-            // onClick={handleSubmit}
+            onClick={handleSubmit}
             disabled={pin < 6 || loading}
           >
             {loading ? (
