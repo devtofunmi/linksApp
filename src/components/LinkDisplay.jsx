@@ -1,7 +1,7 @@
-import { Box, Flex, Input } from "@chakra-ui/react";
+import { Box, Button, Flex, Input } from "@chakra-ui/react";
 import React from "react";
 
-const LinkDisplay = () => {
+const LinkDisplay = ({ lid, link, linkTitle, deleteItem }) => {
   return (
     <>
       <Flex>
@@ -10,16 +10,17 @@ const LinkDisplay = () => {
             my={5}
             variant="filled"
             placeholder="Filled"
-            value={"twitter"}
+            value={linkTitle}
             readOnly={true}
           />
 
           <Input
             variant="filled"
             placeholder="Filled"
-            value={"https://www.twitter.com/codebreake.r"}
+            value={link}
             readOnly={true}
           />
+          <Button onClick={() => deleteItem(lid)}>Delete</Button>
         </Box>
       </Flex>
     </>
