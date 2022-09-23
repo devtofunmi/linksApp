@@ -12,7 +12,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import LinkDisplay from "../components/linkDisplay";
+import LinkDisplay from "../components/LinkDisplay";
 
 const DashBoard = () => {
   const [showLinkModal, setShowLinkModal] = useState(false);
@@ -54,9 +54,11 @@ const DashBoard = () => {
           isClosable: true,
         });
         const newLink = {
+          id: links.length + 1,
           link,
           linkTitle,
         };
+        setLinks([...links, newLink]);
         localStorage.setItem("links", JSON.stringify([...links, newLink]));
         // console.log(dashBoardData);
       }
@@ -65,6 +67,11 @@ const DashBoard = () => {
     }, 1500);
   }
 
+  const deleteLink = (id) => {
+    const newLinksData = links.filter((li) => li.id !== id);
+    setLinks(newLinksData);
+    localStorage.setItem("links", JSON.stringify(newLinksData));
+  };
   return (
     <>
       <Text
@@ -76,14 +83,6 @@ const DashBoard = () => {
       >
         Dashboard
       </Text>
-      <Box>
-        <Menu>
-          <MenuButton as={Button}>Click here</MenuButton>
-          <MenuList>
-            <MenuItem>Download</MenuItem>
-          </MenuList>
-        </Menu>
-      </Box>
       <Flex
         align-items="center"
         justify-content="cener"
@@ -116,7 +115,7 @@ const DashBoard = () => {
           />
           <Input
             variant="filled"
-            placeholder="https://www.twitter.com/codebreake.r"
+            placeholder="Link address"
             onChange={(e) => {
               setLink(e.target.value);
             }}
@@ -141,7 +140,16 @@ const DashBoard = () => {
           </Button>
         </Box>
       )}
-      <LinkDisplay />
+      {links.length < 1 && "no link added"}
+      {links.map((l) => (
+        <LinkDisplay
+          link={l.link}
+          linkTitle={l.linkTitle}
+          key={l.id}
+          deleteItem={deleteLink}
+          lid={l.id}
+        />
+      ))}
     </>
   );
 };
