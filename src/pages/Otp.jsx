@@ -51,7 +51,7 @@ const Otp = () => {
           duration: 2000,
           isClosable: true,
         });
-        // navigate('/login')
+        navigate("/login");
 
         localStorage.setItem(
           "userInfo",
@@ -69,21 +69,22 @@ const Otp = () => {
     <>
       <Flex
         align-items="center"
-        justify-contents="cener"
+        justify-contents="center"
         w={"50%"}
         m="auto"
         flexDirection="column"
       >
         <Box>
           <Text
-            color="blue.500"
+            color="teal"
             fontSize={50}
+            fontWeight={50}
             textAlign="center"
-            fontFamily="sans-serif"
+            gap={5}
           >
             VERIFY OTP
           </Text>
-          <HStack>
+          <HStack marginTop={20}>
             <PinInput otp onChange={(otp) => setPin(otp)}>
               <PinInputField />
               <PinInputField />
@@ -95,7 +96,7 @@ const Otp = () => {
           </HStack>
           <Button
             marginTop={30}
-            backgroundColor="blue.500"
+            backgroundColor="teal"
             color="white"
             onClick={handleSubmit}
             disabled={pin < 6 || loading}
@@ -105,7 +106,7 @@ const Otp = () => {
                 thickness="4px"
                 speed="0.65s"
                 emptyColor="gray.200"
-                color="blue.500"
+                color="teal"
                 size="md"
               />
             ) : (
