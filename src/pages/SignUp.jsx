@@ -85,7 +85,7 @@ const SignUp = () => {
       >
         <Box>
           <Text
-            color="blue.500"
+            color="teal"
             fontSize={50}
             fontWeight={50}
             textAlign="center"
@@ -130,17 +130,13 @@ const SignUp = () => {
                 </Button>
               </InputRightElement>
             </InputGroup>
-            <Button
-              backgroundColor="blue.500"
-              color="white"
-              onClick={handleForm}
-            >
+            <Button backgroundColor="teal" color="white" onClick={handleForm}>
               {loading ? (
                 <Spinner
                   thickness="4px"
                   speed="0.65s"
                   emptyColor="gray.200"
-                  color="blue.500"
+                  color="teal"
                   size="md"
                 />
               ) : (
